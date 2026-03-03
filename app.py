@@ -14,7 +14,8 @@ MODEL = "gpt-4o"
 client = AzureOpenAI(
     api_key=st.secrets["AZURE_OPENAI_API_KEY"],
     api_version=st.secrets["OPENAI_API_VERSION"],
-    azure_endpoint=st.secrets["AZURE_OPENAI_ENDPOINT"]
+    azure_endpoint=st.secrets["AZURE_OPENAI_ENDPOINT"],
+    default_headers={"api-key": st.secrets["AZURE_OPENAI_API_KEY"]}
 )
 
 
