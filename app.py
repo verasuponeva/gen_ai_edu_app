@@ -3,11 +3,8 @@ import os
 
 import streamlit as st
 from openai import AzureOpenAI
-from dotenv import load_dotenv
 
 from db import execute_sql_query, get_schema_description
-
-load_dotenv()
 
 # ---------------------------------------------------------------------------
 # OpenAI client
@@ -15,10 +12,9 @@ load_dotenv()
 MODEL = "gpt-4o"
 
 client = AzureOpenAI(
-    
-    api_key         = os.getenv["AZURE_OPENAI_API_KEY"],
-    api_version     = "2025-04-01-preview",
-    azure_endpoint  = "https://ai-proxy.lab.epam.com"
+    api_key=st.secrets["AZURE_OPENAI_API_KEY"],
+    api_version=st.secrets["OPENAI_API_VERSION"],
+    azure_endpoint=st.secrets["AZURE_OPENAI_ENDPOINT"]
 )
 
 

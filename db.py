@@ -1,17 +1,18 @@
-import os
 import re
 
 import psycopg2
+import streamlit as st
 
 
 def get_connection():
-    """Create a new PostgreSQL connection from environment variables."""
+    """Create a new PostgreSQL connection from Streamlit secrets."""
+    db_config = st.secrets["connections"]["postgresql"]
     return psycopg2.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        port=os.getenv("DB_PORT", "5432"),
-        dbname=os.getenv("DB_NAME", os.getenv("POSTGRES_DB", "postgres")),
-        user=os.getenv("DB_USER", os.getenv("POSTGRES_USER", "postgres")),
-        password=os.getenv("DB_PASSWORD", os.getenv("POSTGRES_PASSWORD", "xxx"),
+        host=db_config["host"],
+        port=db_config["port"],
+        dbname=db_config["database"],
+        user=db_config["username"],
+        password=db_config["password"],
     )
 
 
